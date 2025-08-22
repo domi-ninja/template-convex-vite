@@ -10,19 +10,22 @@ export default function Home() {
         <div>
             <h1>DB Test Widget</h1>
 
+            <div className="py-4">
+                <Button
+                    variant="default"
+                    onClick={() => {
+                        void addNumber({ value: Math.floor(Math.random() * 100) });
+                    }}
+                >
+                    Add Number
+                </Button>
+            </div>
             <div className="flex flex-row gap-2">
                 {numbers?.map((number) => (
                     <span key={number._id}>{number.value}</span>
                 ))}
             </div>
-            <Button
-                variant="default"
-                onClick={() => {
-                    void addNumber({ value: Math.floor(Math.random() * 100) });
-                }}
-            >
-                Add Number
-            </Button>
+
 
         </div>
     );

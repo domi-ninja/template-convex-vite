@@ -25,8 +25,8 @@ dist-ssr
 
 # Ignored for the template, you probably want to remove it:
 package-lock.json
-GEMINI.md
-AGENTS.md
+
+# domi.ninja-convex-vite specific
 site-config.generated.json
 convex-exports.json
 convex-overview.json
@@ -35,3 +35,5 @@ convex-overview.json
 .cursor
 convex-overview.cjs
 CLAUDE.md
+GEMINI.md
+AGENTS.md
