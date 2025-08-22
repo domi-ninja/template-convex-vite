@@ -1,4 +1,3 @@
-import eslint from "@nabla/vite-plugin-eslint";
 import react from "@vitejs/plugin-react";
 import { execSync } from "child_process";
 import path from "path";
@@ -19,20 +18,24 @@ const getGitCommitHash = () => {
 const commitHash = getGitCommitHash();
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => ({
-  plugins: [
-    react(),
-    // Only run ESLint in development mode
-    mode === "development" && eslint(),
-    htmlReplacer(),
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+export default defineConfig(async ({ mode }) => {
+  const plugins = [react(), htmlReplacer()];
+
+  if (mode === "development") {
+    const { default: eslint } = await import("@nabla/vite-plugin-eslint");
+    plugins.push(eslint());
+  }
+
+  return {
+    plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
-  },
-  define: {
-    // We use JSON.stringify to ensure the value is a string literal in the code.
-    "import.meta.env.VITE_GIT_COMMIT_HASH": JSON.stringify(commitHash),
-  },
-}));
+    define: {
+      // We use JSON.stringify to ensure the value is a string literal in the code.
+      "import.meta.env.VITE_GIT_COMMIT_HASH": JSON.stringify(commitHash),
+    },
+  };
+});
