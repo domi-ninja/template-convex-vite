@@ -25,3 +25,13 @@ dist-ssr
 
 # Ignored for the template, you probably want to remove it:
 package-lock.json
+GEMINI.md
+AGENTS.md
+site-config.generated.json
+convex-exports.json
+convex-overview.json
+.eslintcache
+.claude
+.cursor
+convex-overview.cjs
+CLAUDE.md

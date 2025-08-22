@@ -29,7 +29,10 @@ const result = spawnSync("npx", ["@convex-dev/auth", "--skip-git-check"], {
 });
 
 if (runOnceWorkflow) {
-  fs.writeFileSync(".env.local", `\nSETUP_SCRIPT_RAN=1\n`, { flag: "a" });
+  fs.writeFileSync(".env.local", `
+SETUP_SCRIPT_RAN=1
+`, { flag: "a" });
 }
+
 
 process.exit(result.status);
