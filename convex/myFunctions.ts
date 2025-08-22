@@ -1,4 +1,5 @@
 import { getAuthUserId } from "@convex-dev/auth/server";
+import { paginationOptsValidator } from "convex/server";
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
@@ -8,8 +9,9 @@ import { mutation, query } from "./_generated/server";
 // You can read data from the database via a query:
 export const listNumbers = query({
   args: {
-    count: v.number(),
+    paginationOpts: paginationOptsValidator,
   },
+
   // Query implementation.
   handler: async (ctx, args) => {
     //// Read the database as many times as you need here.
@@ -19,16 +21,28 @@ export const listNumbers = query({
     const user = userId === null ? null : await ctx.db.get(userId);
 
     if (!userId) {
-      return []
+      throw new Error("User not authenticated");
     }
 
-    const numbers = await ctx.db
+    const result = await ctx.db
       .query("numbers")
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .order("desc")
-      .take(args.count);
+      .paginate(args.paginationOpts);
 
-    return numbers;
+    return result;
+  },
+});
+
+export const countNumbers = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      throw new Error("User not authenticated");
+    }
+    const numbers = await ctx.db.query("numbers").withIndex("by_user", (q) => q.eq("userId", userId)).collect();
+    return numbers.length;
   },
 });
 
