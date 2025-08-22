@@ -8,7 +8,8 @@
     "dev:frontend": "vite --open --host 0.0.0.0 --port 5000",
     "dev:backend": "convex dev",
     "build": "tsc -p convex -noEmit --pretty false && tsc -p . -noEmit --pretty false && convex dev --once && vite build",
-    "start": "vite preview --host 0.0.0.0 --strictPort --port ${PORT:-4173}",
+    "start": "npx -y vite preview --host 0.0.0.0 --strictPort --port ${PORT:-4173}",
+    "main": "npx -y vite preview --host 0.0.0.0 --strictPort --port ${PORT:-4173}",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "type-check": "tsc -p convex -noEmit && tsc -p . -noEmit"
