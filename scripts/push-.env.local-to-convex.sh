@@ -7,8 +7,12 @@ DEPLOYMENT=""
 
 # Check for optional deployment parameter
 if [[ -n "$1" ]]; then
-  DEPLOYMENT="--deployment-name $1"
-  echo "Using deployment: $1"
+  if [ $1 == "prod" ]; then
+    DEPLOYMENT="--prod"
+  else
+    DEPLOYMENT="--deployment-name $1"
+    echo "Using deployment: $1"
+  fi
 fi
 
 # Check if .env.local exists
@@ -36,7 +40,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     echo "Setting $var_name..."
     npx convex env set $DEPLOYMENT "$var_name" -- "$var_value"
   fi
-done < "$ENV_FILE"
+done <"$ENV_FILE"
 
 echo "Done! Current environment variables:"
 echo npx convex env list $DEPLOYMENT
