@@ -1,4 +1,3 @@
-import ConvexPaging from "@/components/ConvexPaging";
 import { Button } from "@/components/ui/button";
 import { useMutation, usePaginatedQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -6,17 +5,16 @@ import { Doc } from "../../convex/_generated/dataModel";
 
 export default function Home() {
 
-    const { results, status, loadMore } = usePaginatedQuery(
+    const numbersPage = usePaginatedQuery(
         api.myFunctions.listNumbers,
         {},
-        { initialNumItems: 5 }
+        { initialNumItems: 10 }
     );
 
     const addNumber = useMutation(api.myFunctions.addNumber);
     return (
         <div>
             <h1>DB Test Widget</h1>
-
             <div className="py-4">
                 <Button
                     variant="default"
@@ -27,22 +25,12 @@ export default function Home() {
                     Add Number
                 </Button>
             </div>
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap gap-2">
-                    {(results ?? []).map((number: Doc<"numbers">) => (
-                        <NumberItem key={number._id} number={number} />
-                    ))}
-                </div>
-                <ConvexPaging
-                    paging={{ numItems: 10, cursor: null }}
-                    onChange={() => {
-                        loadMore(10);
-                    }}
-                ></ConvexPaging>
-
+            <div className="flex flex-wrap gap-4">
+                {(numbersPage.results ?? []).map((number: Doc<"numbers">) => (
+                    <NumberItem key={number._id} number={number} />
+                ))}
+                <Button disabled={numbersPage.status === "Exhausted"} variant="secondary" onClick={() => numbersPage.loadMore(numbersPage.results.length)}>Load More</Button>
             </div>
-
-
         </div>
     );
 }
