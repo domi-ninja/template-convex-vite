@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
     siteKeywords: "site keyword 1, site keyword 2, site keyword 3",
     siteAuthor: "Dominic",
     siteImage: "/favicon.ico",
-    siteContactEmail: "dominic@convex.datenschrauber.ch",
+    siteContactEmail: "convex.demo@datenschrauber.ch",
     githubUrl: "https://github.com/domi-ninja/domi.ninja-convex-vite",
 };
 
