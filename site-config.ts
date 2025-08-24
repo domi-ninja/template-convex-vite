@@ -10,6 +10,7 @@ export interface SiteConfig {
     siteImage: string;
     siteContactEmail: string;
     githubUrl: string;
+    emailPrimaryColor: string;
 }
 
 export const siteConfig: SiteConfig = {
@@ -22,6 +23,7 @@ export const siteConfig: SiteConfig = {
     siteImage: "/favicon.ico",
     siteContactEmail: "convex.demo@datenschrauber.ch",
     githubUrl: "https://github.com/domi-ninja/domi.ninja-convex-vite",
+    emailPrimaryColor: "oklch(0.8 0.5 120)",
 };
 
 export default siteConfig;

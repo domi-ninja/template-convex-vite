@@ -2,7 +2,6 @@ import { EmailConfig, EmailUserConfig } from "@auth/core/providers";
 import { alphabet, generateRandomString } from "oslo/crypto";
 import siteConfig from "../../../site-config";
 import SigninLinkMail from "./MailTemplateSigninLink";
-//import { html, text } from "@auth/core/src/providers/email.js"
 
 /** @todo Document this */
 export default function ScalewayEmailAuth(config: EmailUserConfig): EmailConfig {
@@ -34,7 +33,7 @@ export default function ScalewayEmailAuth(config: EmailUserConfig): EmailConfig 
         const mail = SigninLinkMail({
           url: params.url,
           dateExpires: dateExpires,
-          email: recipientMail,
+          recipientMail,
         });
 
         const response = await fetch("https://api.scaleway.com/transactional-email/v1alpha1/regions/fr-par/emails", {

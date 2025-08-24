@@ -2,7 +2,7 @@ import siteConfig from "../../../site-config";
 
 export default function SigninLinkMail(params: {
     url: string;
-    email: string;
+    recipientMail: string;
     dateExpires: Date;
     isSignUp?: boolean;
 }) {
@@ -25,6 +25,7 @@ export default function SigninLinkMail(params: {
             </o:OfficeDocumentSettings>
         </xml>
     </noscript>
+
     <![endif]-->
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333333; background-color: #f9fafb;">
@@ -35,7 +36,7 @@ export default function SigninLinkMail(params: {
                     <!-- Header -->
                     <tr>
                         <td style="padding: 40px 40px 20px; text-align: center; border-bottom: 1px solid #e5e7eb;">
-                            <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #4F46E5; text-decoration: none;">
+                            <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: ${siteConfig.emailPrimaryColor}; text-decoration: none;">
                                 ${siteConfig.siteName}
                             </h1>
                             <p style="margin: 8px 0 0; font-size: 16px; color: #6B7280;">
@@ -48,7 +49,7 @@ export default function SigninLinkMail(params: {
                     <tr>
                         <td style="padding: 40px;">
                             <h2 style="margin: 0 0 24px; font-size: 24px; font-weight: 600; color: #111827; text-align: center;">
-                                ${isSignUpMode ? "Complete your account setup" : `Sign in to your account as ${params.email}`}
+                                ${isSignUpMode ? "Complete your account setup" : `Sign in to your account as ${params.recipientMail}`}
                             </h2>
 
                             <p style="margin: 0 0 32px; font-size: 16px; color: #4B5563; text-align: center; line-height: 1.5;">
@@ -63,9 +64,9 @@ export default function SigninLinkMail(params: {
                                 <tr>
                                     <td align="center">
                                         <a href="${params.url}"
-                                           style="display: inline-block; padding: 16px 32px; background-color: #4F46E5; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 1; border: none; cursor: pointer; transition: background-color 0.2s ease;"
+                                           style="display: inline-block; padding: 16px 32px; background-color: ${siteConfig.emailPrimaryColor}; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 1; border: none; cursor: pointer; transition: background-color 0.2s ease;"
                                            onmouseover="this.style.backgroundColor='#4338CA'"
-                                           onmouseout="this.style.backgroundColor='#4F46E5'">
+                                           onmouseout="this.style.backgroundColor='${siteConfig.emailPrimaryColor}'">
                                             ${actionText} to ${siteConfig.siteName}
                                         </a>
                                     </td>
@@ -77,7 +78,7 @@ export default function SigninLinkMail(params: {
                                 If the button doesn't work, you can copy and paste this link into your browser:
                             </p>
                             <p style="margin: 8px 0 0; font-size: 14px; text-align: center; word-break: break-all;">
-                                <a href="${params.url}" style="color: #4F46E5; text-decoration: underline;">${params.url}</a>
+                                <a href="${params.url}" style="color: ${siteConfig.emailPrimaryColor}; text-decoration: underline;">${params.url}</a>
                             </p>
                         </td>
                     </tr>
@@ -101,7 +102,7 @@ export default function SigninLinkMail(params: {
                         <td style="padding: 20px 40px 40px; text-align: center; border-top: 1px solid #e5e7eb;">
                             <p style="margin: 0 0 8px; font-size: 14px; color: #6B7280;">
                                 Questions? Contact us at
-                                <a href="mailto:${siteConfig.siteContactEmail}" style="color: #4F46E5; text-decoration: none;">
+                                <a href="mailto:${siteConfig.siteContactEmail}" style="color: ${siteConfig.emailPrimaryColor}; text-decoration: none;">
                                     ${siteConfig.siteContactEmail}
                                 </a>
                             </p>
@@ -123,7 +124,7 @@ ${titleText}
 
 ${isSignUpMode
             ? `Click the link below to complete your ${siteConfig.siteName} account setup:`
-            : `Click the link below to securely sign in to your account as ${params.email}:`
+            : `Click the link below to securely sign in to your account as ${params.recipientMail}:`
         }
 ${params.url}
 
