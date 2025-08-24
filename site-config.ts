@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
     defaultImage: "/convex.svg",
     siteKeywords: "site keyword 1, site keyword 2, site keyword 3",
     siteAuthor: "Dominic",
-    siteImage: "/favicon.ico",
+    siteImage: "/convex.svg",
     siteContactEmail: "convex.demo@datenschrauber.ch",
     githubUrl: "https://github.com/domi-ninja/domi.ninja-convex-vite",
     emailPrimaryColor: "oklch(0.8 0.5 120)",
