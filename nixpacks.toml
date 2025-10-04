@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_18", "pnpm-9_x"]
+
+[phases.install]
+cmds = ["pnpm i --frozen-lockfile"]
+
+[phases.build]
+cmds = ["npx convex deploy --cmd 'pnpm run build'"]
+
+[start]
+cmd = "npx serve dist -s -l $PORT"
