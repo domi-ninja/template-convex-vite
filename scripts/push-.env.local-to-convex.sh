@@ -23,6 +23,11 @@ fi
 
 echo "Pushing environment variables from $ENV_FILE to Convex..."
 
+IFS=$'\n'
+for line in $(npx convex env list); do
+  npx convex env remove $(echo $line | cut -d '=' -f 1)
+done
+
 # Read .env.local and process each line
 while IFS= read -r line || [[ -n "$line" ]]; do
   # Skip empty lines and comments
