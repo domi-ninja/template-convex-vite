@@ -1,3 +1,7 @@
+<!-- moved-to-codeberg -->
+> This repository moved to [Codeberg](https://codeberg.org/domi-ninja/template-convex-vite).
+>
+> I moved off GitHub because it became unreliable after the Microsoft acquisition.
 # template for [convex.dev](https://convex.dev/) + vite
 
 This is how I set up my explorative side projects. Since this is a small vite react project, it is pretty modular, though many modules are covered by convex because that's just very nice. It is not the most fleshed out because I want these to be easy to set up.
